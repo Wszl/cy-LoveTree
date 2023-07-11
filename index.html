@@ -27,7 +27,7 @@
 <body>
 
 <img src="https://ajlovechina.github.io/loveBalloon/static/music.png" style="position: fixed;z-index: 10001;top:10px;right:10px;" onclick="let m = document.querySelector('.song-audio-autoplay'); if (m.paused ) {m.play(); this.className = 'rotateImages'} else {m.pause(); this.className = ''}">
-<audio class="song-audio-autoplay" controls loop style="display: none;visibility: hidden">
+<audio class="song-audio-autoplay" autoplay controls loop style="display: none;visibility: hidden">
     <source src="./index_files/music.mp3" type="audio/mp3"/>
 </audio>
 <style type="text/css">
@@ -74,7 +74,7 @@
     }).reduce((a, b) => {
         return a + b;
     }))
-    $("#clock-box-inside-text").html(`${config.names[0]}<span class="STYLE1">与</span> ${config.names[1]}<span class="STYLE1">已经相恋了</span>`)
+    $("#clock-box-inside-text").html(`${config.names[0]}<span class="STYLE1">还爱着</span> ${config.names[1]}<span class="STYLE1"></span>`)
 </script>
 
 <script>
@@ -133,6 +133,15 @@
         var foot = tree.footer;
         var hold = 1;
 
+        function drawHerPhoto(canvas) {
+            let ctx = canvas[0].getContext("2d");
+            let img = new Image();
+            img.src = "./index_files/her.jpg"
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, 100, 100)
+            }
+        }
+
         canvas.click(function (e) {
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
@@ -143,6 +152,7 @@
                 canvas.unbind("mousemove");
                 canvas.removeClass('hand');
             }
+            drawHerPhoto(canvas);
         }).mousemove(function (e) {
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
